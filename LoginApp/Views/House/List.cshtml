@@ -1,0 +1,31 @@
+﻿@model IEnumerable<RealEstateApp2.Models.House>
+
+@{ ViewBag.Title = "List"; }
+
+@foreach (var p in Model)
+{
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h3>@p.Street @Html.ActionLink("Edit", "Edit", new { p.HouseID })</h3>
+    }
+    <br />
+    Realtor: @p.Realtor.FirstName<br />
+    Square Feet: @p.SquareFeet<br />
+    Num Bedrooms: @p.NumBedrooms<br />
+    Num Baths: @p.NumBaths<br />
+    Price: @p.Price.ToString("c")<br />
+    <br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Delete", "Delete", new { p.HouseID })
+    }
+</div>}
+
+<div>
+    <br /><br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Add a new house", "Create")
+    }
+</div>
